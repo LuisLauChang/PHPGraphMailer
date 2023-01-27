@@ -115,6 +115,13 @@ class graphMailer {
                 $messageArray['ccRecipients'][] = array('emailAddress' => array('address' => $recipient['address']));
             }
         }
+        foreach ($messageArgs['bccRecipients'] as $recipient) {
+            if ($recipient['name']) {
+                $messageArray['bccRecipients'][] = array('emailAddress' => array('name' => $recipient['name'], 'address' => $recipient['address']));
+            } else {
+                $messageArray['bccRecipients'][] = array('emailAddress' => array('address' => $recipient['address']));
+            }
+        }
         $messageArray['subject'] = $messageArgs['subject'];
         $messageArray['importance'] = ($messageArgs['importance'] ? $messageArgs['importance'] : 'normal');
         if (isset($messageArgs['replyTo'])) $messageArray['replyTo'] = array(array('emailAddress' => array('name' => $messageArgs['replyTo']['name'], 'address' => $messageArgs['replyTo']['address'])));
